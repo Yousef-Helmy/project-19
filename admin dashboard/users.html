@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users</title>
+  <link rel="stylesheet" href="./css/all.min.css" />
+  <link rel="stylesheet" href="./css/framework.css" />
+  <link rel="stylesheet" href="./css/master.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Start Sidebar -->
+  <div class="page d-flex">
+    <div class="sidebar bg-white p-20 p-relative">
+      <h3 class="p-relative txt-c mt-0">Sm<i class="fa-solid fa-infinity"></i>th<br>Passage</h3>
+      <ul>
+        <li>
+          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="index.html">
+            <i class="fa-regular fa-chart-bar fa-fw"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="users.html">
+            <i class="fa-regular fa-circle-user fa-fw"></i>
+            <span>Users</span>
+          </a>
+        </li>
+        <li>
+          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Transactions.html">
+            <i class="fa-solid fa-clock-rotate-left fa-fw"></i>
+            <span>Transactions</span>
+          </a>
+        </li>
+        <li>
+          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Complaints.html">
+            <i class="fa-regular fa-file fa-fw"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="feedback.htmls">
+            <i class="fa-solid fa-comment fa-fw"></i>
+            <span>Feedbacks</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- End Sidebar -->
+    <div class="content w-full">
+      <!-- Start Head -->
+      <div class="head bg-white p-15 between-flex">
+        <div class="search p-relative">
+          <input class="p-10" id="searchInput" type="search" placeholder="Type A Keyword" onkeyup="filterUsers()" />
+        </div>
+        <div class="icons d-flex align-center">
+          <span class="notification p-relative">
+            <i class="fa-regular fa-bell fa-lg"></i>
+          </span>
+          <img src="./imgs/avatar.png" alt="" />
+          <a class="c-black p-15" id="logout" href="login.html">
+            <span>Log-Out</span>
+            <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+          </a>
+        </div>
+      </div>
+      <!-- End Head -->
+      <h1 class="p-relative">Users</h1>
+      <div class="user-page d-grid m-20 gap-20" id="user_box">
+      </div>
+    </div>
+  </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <script>
+      // Firebase Initialization
+      const firebaseConfig = {
+        apiKey: "AIzaSyAcjMJwqghfhn3YevNPDZrixSEX-RbDnYg",
+        authDomain: "smooth-bd82d.firebaseapp.com",
+        databaseURL: "https://smooth-bd82d-default-rtdb.firebaseio.com",
+        projectId: "smooth-bd82d",
+        storageBucket: "smooth-bd82d.appspot.com",
+        messagingSenderId: "351677031588",
+        appId: "1:351677031588:web:7d5463afe3844a9942b231",
+        measurementId: "G-CEDELYMSSD"
+      };
+      firebase.initializeApp(firebaseConfig);
+  
+      // Function to create user HTML element
+      const createUserElement = (user, userId) => {
+        const userElement = document.createElement('div');
+        userElement.id = userId;
+        userElement.classList.add('user', 'bg-white', 'rad-6', 'p-20', 'p-relative');
+        userElement.innerHTML = `
+          <div class="contact">
+            <a href="https://wa.me/${user.phonenumber}" target="_blank">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+            <a href="mailto:${user.email}" target="_blank">
+              <i class="fa-regular fa-envelope"></i>
+            </a>
+          </div>
+          <div class="txt-c">
+            <img class="rad-half mt-10 mb-10 w-100 h-100" src="${user.profile_picture}" alt="User Image" />
+            <h4 class="m-0">${user.first_name} ${user.last_name}</h4>
+            <p class="c-grey fs-13 mt-5 mb-0">${user.license_plate}</p>
+          </div>
+          <div class="icons fs-14 p-relative">
+            <div class="mb-10">
+              <i class="fa-regular fa-envelope fa-fw"></i>
+              <span>${user.email}</span>
+            </div>
+            <div class="mb-10">
+              <i class="fa-solid fa-phone fa-fw"></i>
+              <span>${user.phonenumber}</span>
+            </div>
+            <div class="mb-10">
+              <i class="fa-solid fa-id-card"></i>
+              <span>${user.national_id}</span>
+            </div>
+          </div>
+          <div class="info between-flex fs-13">
+            <button class="bg-red c-white btn-shape delete-user">Delete</button>
+          </div>
+        `;
+        return userElement;
+      };
+  
+      // Start fetching and displaying users
+      const usersRef = firebase.database().ref('users');
+      usersRef.on('child_added', snapshot => {
+        const user = snapshot.val();
+        const userId = snapshot.key;
+        const userElement = createUserElement(user, userId);
+        document.getElementById('user_box').appendChild(userElement);
+      });
+  
+      // Function to delete user from database and UI
+      document.addEventListener('click', event => {
+        if (event.target.classList.contains('delete-user')) {
+          const userElement = event.target.closest('.user');
+          if (userElement) {
+            const userId = userElement.id;
+            firebase.database().ref('users/' + userId).remove()
+              .then(() => {
+                console.log("User deleted successfully!");
+                userElement.remove();
+              })
+              .catch(error => {
+                console.error("Error deleting user: ", error);
+              });
+          }
+        }
+      });
+  
+      // Function to filter users based on search input
+      const filterUsers = () => {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const userBox = document.getElementById('user_box');
+        const userDivs = userBox.getElementsByClassName('user');
+        Array.from(userDivs).forEach(userDiv => {
+          const textContent = userDiv.textContent || userDiv.innerText;
+          if (textContent.toUpperCase().indexOf(filter) > -1) {
+            userDiv.style.display = "";
+          } else {
+            userDiv.style.display = "none";
+          }
+        });
+      };
+    </script>
+</body>
+</html>

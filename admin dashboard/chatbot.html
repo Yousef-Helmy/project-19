@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatbot</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/framework.css" />
+    <link rel="stylesheet" href="css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page d-flex">
+      <div class="sidebar bg-white p-20 p-relative">
+        <h3 class="p-relative txt-c mt-0">Sm<i class="fa-solid fa-infinity"></i>th<br>Passage</h3>
+        <ul>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="index.html">
+              <i class="fa-regular fa-chart-bar fa-fw"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="users.html">
+              <i class="fa-regular fa-circle-user fa-fw"></i>
+              <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Transactions.html">
+              <i class="fa-solid fa-clock-rotate-left fa-fw"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Complaints.html">
+              <i class="fa-regular fa-file fa-fw"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="courses.html">
+              <i class="fa-solid fa-robot fa-fw"></i>
+              <span>chatbot</span>
+            </a>
+          </li>
+          <li>
+        </ul>
+      </div>
+      <div class="content w-full">
+        <!-- Start Head -->
+        <div class="head bg-white p-15 between-flex">
+          <div class="search p-relative">
+            <input class="p-10" type="search" placeholder="Type A Keyword" />
+          </div>
+          <div class="icons d-flex align-center">
+            <span class="notification p-relative">
+              <i class="fa-regular fa-bell fa-lg"></i>
+            </span>
+            <img src="imgs/avatar.png" alt="" />
+            <a class="c-black p-15" id="logout" href="login.html">
+              <span>Log-Out</span>
+              <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+              </a>
+          </div>
+        </div>
+        <!-- End Head -->
+        <h1 class="p-relative"><i class="fa-solid fa-robot"></i>chatbot</h1>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.min.css" rel="stylesheet"/>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+  
+      <div class="row">
+  
+        <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+  
+          <h5 class="font-weight-bold mb-3 text-center text-lg-start">Member</h5>
+  
+          <div class="card">
+            <div class="card-body">
+  
+              <ul class="list-unstyled mb-0">
+                <li class="p-2 border-bottom" style="background-color: #eee;">
+                  <a href="#!" class="d-flex justify-content-between">
+                    <div class="d-flex flex-row">
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
+                        class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                      <div class="pt-1">
+                        <p class="fw-bold mb-0">John Doe</p>
+                        <p class="small text-muted">Hello, Are you there?</p>
+                      </div>
+                    </div>
+                    <div class="pt-1">
+                      <p class="small text-muted mb-1">Just now</p>
+                      <span class="badge bg-danger float-end">1</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="p-2">
+                  <a href="#!" class="d-flex justify-content-between">
+                    <div class="d-flex flex-row">
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                        class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                      <div class="pt-1">
+                        <p class="fw-bold mb-0">Brad Pitt</p>
+                        <p class="small text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                    </div>
+                    <div class="pt-1">
+                      <p class="small text-muted mb-1">5 mins ago</p>
+                      <span class="text-muted float-end"><i class="fas fa-check" aria-hidden="true"></i></span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-7 col-xl-8">
+          <ul class="list-unstyled">
+            <li class="d-flex justify-content-between mb-4">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">user uame</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <!--admin massage-->
+            <li class="d-flex justify-content-between mb-4">
+              <div class="card w-100">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">admin name</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">admin massage</p>
+                </div>
+              </div>
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"
+                class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
+            </li>
+           
+            <li class="bg-white mb-3">
+              <div data-mdb-input-init class="form-outline">
+                <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+                <label class="form-label" for="textAreaExample2">Message</label>
+              </div>
+            </li>
+            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-rounded float-end">Send</button>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </body>        
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedbacks</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/framework.css" />
+    <link rel="stylesheet" href="css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page d-flex">
+      <div class="sidebar bg-white p-20 p-relative">
+        <h3 class="p-relative txt-c mt-0">Sm<i class="fa-solid fa-infinity"></i>th<br>Passage</h3>
+        <ul>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="index.html">
+              <i class="fa-regular fa-chart-bar fa-fw"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="users.html">
+              <i class="fa-regular fa-circle-user fa-fw"></i>
+              <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Transactions.html">
+              <i class="fa-solid fa-clock-rotate-left fa-fw"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Complaints.html">
+              <i class="fa-regular fa-file fa-fw"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="feedback.html">
+              <i class="fa-regular fa-comment fa-fw"></i>
+              <span>Feedbacks</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="content w-full">
+        <!-- Start Head -->
+        <div class="head bg-white p-15 between-flex">
+          <div class="search p-relative">
+            <input class="p-10" type="search" placeholder="Type A Keyword" />
+          </div>
+          <div class="icons d-flex align-center">
+            <span class="notification p-relative">
+              <i class="fa-regular fa-bell fa-lg"></i>
+            </span>
+            <img src="imgs/avatar.png" alt="admin_pic" />
+            <a class="c-black p-15" id="logout" href="login.html">
+              <span>Log-Out</span>
+              <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+            </a>
+          </div>
+        </div>
+        <!-- End Head -->
+        <h1 class="p-relative">Feedbacks</h1>
+        <div class="Complaints-page d-grid m-20 gap-20" id="complaint_box">
+        
+        </div>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-functions.js"></script>  
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAcjMJwqghfhn3YevNPDZrixSEX-RbDnYg",
+        authDomain: "smooth-bd82d.firebaseapp.com",
+        databaseURL: "https://smooth-bd82d-default-rtdb.firebaseio.com",
+        projectId: "smooth-bd82d",
+        storageBucket: "smooth-bd82d.appspot.com",
+        messagingSenderId: "351677031588",
+        appId: "1:351677031588:web:7d5463afe3844a9942b231",
+        measurementId: "G-CEDELYMSSD"
+      };
+      firebase.initializeApp(firebaseConfig);
+      
+      const complaintsRef = firebase.database().ref('complaints');
+      complaintsRef.on('child_added', snapshot => {
+        const complaint = snapshot.val();
+        
+        // Check if complaint has feedback
+        if (!complaint.feedback) {
+          return; // Skip this complaint if no feedback
+        }
+        const complaintElement = document.createElement('div');
+        complaintElement.classList.add('Complaints', 'bg-white', 'rad-6', 'p-20', 'p-relative');
+        complaintElement.innerHTML = `
+          <div class="contact">
+            <a href="mailto:${complaint.user_email}" target="_blank">
+              <i class="fa-regular fa-envelope"></i>
+            </a>
+          </div>
+          <div class="txt-c">
+            <h4 class="m-0">${complaint.user_name}</h4>
+            <p class="c-grey fs-13 mt-5 mb-0">${complaint.id}</p>
+          </div>
+          <div class="icons fs-14 p-relative">
+            <div class="mb-10">
+              <i class="fa-regular fa-envelope fa-fw"></i>
+              <span>${complaint.user_email}</span>
+            </div>
+            <div class="mb-10">
+              <i class="fa-regular fa-file-lines fa-fw"></i>
+              <span>${complaint.complaint}</span>
+            </div>
+            <div class="mb-10">
+              <i class="fa-regular fa-file-lines fa-fw"></i>
+              <span>${complaint.feedback}</span>
+            </div>
+          </div>
+          <div class="info between-flex fs-13">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>${complaint.date_time}</span>
+            <button class="bg-red c-white btn-shape pr-15 delete-complaint">delete</button>
+            <button class="bg-blue c-white btn-shape pr-15 print-complaint">print</button>
+          </div>
+        `;
+        document.getElementById('complaint_box').appendChild(complaintElement);
+      });
+      
+      const filterComplaints = () => {
+        const input = document.querySelector('.search input');
+        const filter = input.value.toUpperCase();
+        const complaintBox = document.getElementById('complaint_box');
+        const complaintDivs = complaintBox.getElementsByClassName('Complaints');
+        
+        Array.from(complaintDivs).forEach(complaint => {
+          const id = complaint.querySelector('.txt-c p').textContent.toUpperCase();
+          const userName = complaint.querySelector('.txt-c h4').textContent.toUpperCase();
+          const userEmail = complaint.querySelector('.icons div:nth-child(1) span').textContent.toUpperCase();
+          
+          if (id.indexOf(filter) > -1 || userName.indexOf(filter) > -1 || userEmail.indexOf(filter) > -1) {
+            complaint.style.display = "";
+          } else {
+            complaint.style.display = "none";
+          }
+        });
+      };
+      
+      document.querySelector('.search input').addEventListener('input', filterComplaints);
+      
+      const sendFeedback = (complaintId, feedback) => {
+        const complaintRef = firebase.database().ref('complaints').child(complaintId);
+        complaintRef.update({
+          feedback
+        })
+        .then(() => {
+          console.log("Feedback added successfully!");
+        })
+        .catch(error => {
+          console.error("Error adding feedback: ", error);
+        });
+      };
+
+      document.addEventListener('click', event => {
+        if (event.target.classList.contains('send-feedback')) {
+          const complaintElement = event.target.closest('.Complaints');
+          if (complaintElement) {
+            const complaintId = complaintElement.querySelector('.c-grey').textContent;
+            const feedbackInput = complaintElement.querySelector('.feedback-input');
+            const feedback = feedbackInput.value.trim();
+            
+            if (feedback !== '') {
+              const fullFeedback = `Considered complaint No-(${complaintId}): ${feedback}`;
+              sendFeedback(complaintId, fullFeedback);
+              feedbackInput.value = '';
+            } else {
+              alert("Please provide feedback before sending.");
+            }
+          }
+        }
+      });
+
+      document.addEventListener('click', event => {
+        if (event.target.classList.contains('delete-complaint')) {
+          const complaintElement = event.target.closest('.Complaints');
+          if (complaintElement) {
+            const complaintId = complaintElement.querySelector('.c-grey').textContent;      
+            complaintsRef.child(complaintId).remove()
+              .then(() => {
+                console.log("Complaint deleted successfully!");
+                complaintElement.remove(); 
+              })
+              .catch(error => {
+                console.error("Error deleting complaint: ", error);
+              });
+          }
+        }
+      });
+
+      const printComplaint = element => {
+        const originalElement = element.closest('.Complaints');
+        const userName = originalElement.querySelector('h4').textContent;
+        const complaintId = originalElement.querySelector('.c-grey').textContent;
+        const complaintText = originalElement.querySelector('.icons div:nth-child(2) span').textContent;
+        const feedbackText = originalElement.querySelector('.icons div:nth-child(3) span').textContent;
+        const dateTime = originalElement.querySelector('.info span').textContent;
+        const printWindow = window.open('', '_blank', 'width=800,height=800');
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print Complaint</title>
+              <style>
+                body { 
+                  font-family: "Open Sans", sans-serif; 
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                }
+                .btn-shape { 
+                  display: none; 
+                }
+                .logo {
+                  text-align: center;
+                  margin-bottom: 20px;
+                }
+                table {
+                  border-collapse: collapse;
+                  width: 80%;
+                  margin-top: 20px;
+                }
+                th, td {
+                  border: 1px solid black;
+                  padding: 8px;
+                  text-align: center;
+                }
+                th {
+                  background-color: #f2f2f2;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="logo">
+                <img src="imgs/new logo.png" alt="Project Logo" style="width: 150px;">
+              </div>
+              <table>
+                <tr>
+                  <th>User Name</th>
+                  <td>${userName}</td>
+                </tr>
+                <tr>
+                  <th>Complaint ID</th>
+                  <td>${complaintId}</td>
+                </tr>
+                <tr>
+                  <th>Complaint</th>
+                  <td>${complaintText}</td>
+                </tr>
+                <tr>
+                  <th>Feedback</th>
+                  <td>${feedbackText}</td>
+                </tr>
+                <tr>
+                  <th>Date & Time</th>
+                  <td>${dateTime}</td>
+                </tr>
+              </table>
+            </body>
+          </html>
+        `);
+
+        printWindow.document.close();
+        printWindow.onload = () => {
+          printWindow.focus();
+          printWindow.print();
+          printWindow.close();
+        };
+      };
+
+      document.addEventListener('click', event => {
+        if (event.target.classList.contains('print-complaint')) {
+          printComplaint(event.target);
+        }
+      });
+
+    </script>
+  </body>
+</html>

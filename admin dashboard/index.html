@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/framework.css" />
+    <link rel="stylesheet" href="css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="page d-flex">
+    <div class="sidebar bg-white p-20 p-relative">
+    <h3 class="p-relative txt-c mt-0">Sm<i class="fa-solid fa-infinity"></i>th<br>Passage</h3>
+        <ul>
+        <li>
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="index.html">
+            <i class="fa-regular fa-chart-bar fa-fw"></i>
+                <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="users.html">
+            <i class="fa-regular fa-circle-user fa-fw"></i>
+             <span>Users</span>
+            </a>
+            </li>
+            <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Transactions.html">
+                <i class="fa-solid fa-clock-rotate-left fa-fw"></i>
+                <span>Transactions</span>
+                </a>
+            </li>
+            <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="Complaints.html">
+                <i class="fa-regular fa-file fa-fw"></i>
+                <span>Complaints</span>
+            </a>
+            </li>
+            <li>
+            <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="feedback.html">
+                <i class="fa-solid fa-comment fa-fw"></i>
+                <span>Feedbacks</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content w-full">
+    <!-- Start Head -->
+    <div class="head bg-white p-15 between-flex">
+    <div class="search p-relative">
+    <input class="p-10" type="search" placeholder="Type A Keyword" />
+    </div>
+    <div class="icons d-flex align-center">
+    <span class="notification p-relative">
+      <i class="fa-regular fa-bell fa-lg"></i>
+    </span>
+     <img src="imgs/avatar.png" alt="" />
+      <a class="c-black p-15" id="logout" href="login.html">
+       <span>Log-Out</span>
+        <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+      </a>
+     </div>
+    </div>
+    <!-- End Head -->
+    <h1 class="p-relative">Dashboard</h1>
+    <div class="wrapper d-grid gap-20">
+    <!-- Start Welcome Widget -->
+     <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
+        <div class="intro p-20 d-flex space-between bg-eee">
+            <div>
+                <h2 class="m-0">Welcome</h2>
+                <p class="c-grey mt-5" id="adminName"> adminName</p>
+            </div>
+            <img class="hide-mobile" src="imgs/welcome.png" alt="" />
+        </div>
+        <img src="imgs/avatar.png" alt="" class="avatar" />
+        <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile" id="adminInfo">
+        </div>
+        <a href="" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Show tasks</a>
+    </div>
+    <!-- End Welcome Widget -->
+     <!-- Start Targets Widget -->
+      <div class="targets p-20 bg-white rad-10">
+        <h2 class="mt-0 mb-10">Total income</h2>
+        <p class="mt-0 mb-20 c-grey fs-15">Targets Of The smooth passage income </p>
+        <div class="target-row mb-20 blue center-flex">
+        <div class="icon center-flex">
+        <i class="fa-solid fa-dollar-sign fa-lg c-blue"></i>
+        </div>
+        <div class="details">
+        <span class="fs-14 c-grey">Money</span>
+        <span class="d-block mt-5 mb-10 fw-bold" id="realMoney">0</span>
+        <div class="progress p-relative">
+        <span class="bg-blue blue" style="width: 0%">
+        <span class="bg-blue">0%</span>
+        </span>
+        </div>
+        </div>
+        </div>
+        <div class="target-row mb-20 center-flex orange">
+        <div class="icon center-flex">
+        <i class="fa-solid fa-car-side fa-lg c-orange"></i>
+        </div>
+        <div class="details">
+        <span class="fs-14 c-grey">Cars</span>
+        <span class="d-block mt-5 mb-10 fw-bold" id="realCars">0</span>
+        <div class="progress p-relative">
+        <span class="bg-orange orange" style="width:0%">
+        <span class="bg-orange">0%</span>
+        </span>
+        </div>
+        </div>
+        </div>
+        <div class="target-row mb-20 center-flex green">
+        <div class="icon center-flex">
+        <i class="fa-brands fa-artstation fa-lg c-green"></i>
+        </div>
+        <div class="details">
+        <span class="fs-14 c-grey">Stations</span>
+        <span class="d-block mt-5 mb-10 fw-bold" id="realStations">0</span>
+        <div class="progress p-relative">
+        <span class="bg-green green" style="width: 0%">
+        <span class="bg-green">0%</span>
+        </span>
+        </div>
+        </div>
+        </div>
+    </div>            
+    <!-- End Targets Widget -->
+     <!-- Start Ticket Widget -->
+      <div class="tickets p-20 bg-white rad-10">
+        <h2 class="mt-0 mb-10">System Statistics</h2>
+        <p class="mt-0 mb-20 c-grey fs-15">Everything About Support system</p>
+        <div class="d-flex txt-c gap-20 f-wrap">
+            <div class="box p-20 rad-10 fs-13 c-grey">
+            <i class="fa-regular fa-rectangle-list fa-2x mb-10 c-orange"></i>
+            <span id="totalComplaintsCount" class="d-block c-black fw-bold fs-25 mb-5">0</span>
+            Total complaints
+        </div>
+        <div class="box p-20 rad-10 fs-13 c-grey">
+            <i class="fa-solid fa-spinner fa-2x mb-10 c-blue"></i>
+            <span id="newTransactionsCount" class="d-block c-black fw-bold fs-25 mb-5">0</span>
+            New Transactions
+        </div>
+        <div class="box p-20 rad-10 fs-13 c-grey">
+            <i class="fa-regular fa-circle-check fa-2x mb-10 c-green"></i>
+            <span id="newAccountsCount" class="d-block c-black fw-bold fs-25 mb-5">0</span>
+            New accounts
+        </div>
+    </div>
+    </div>
+    <!-- End Ticket Widget -->
+    <!--start input-tasks-->
+    <div class="input-tasks p-20 bg-white rad-10">
+    <h2 class="mt-0 mb-10">Input-Tasks</h2>
+    <p class="mt-0 mb-20 c-grey fs-15">Write Your tasks</p>
+    <form id="taskForm">
+        <input id="taskTitle" class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" type="text" placeholder="write a Title of tasks" />
+        <textarea id="taskDetails" class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" placeholder="task details"></textarea>
+        <input class="save d-block fs-14 bg-blue c-white b-none w-fit btn-shape" type="submit" value="Save" />
+    </form>
+    </div>
+      <!--end input-tasks-->
+        <div class="tasks-table p-20 bg-white rad-10">
+        <h2 class="mt-0 mb-10">Tasks</h2>
+        <table>
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Task Title</th>
+                <th>Task Details</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tasksTableBody"></tbody>
+        </table>
+        </div>
+      </div>
+  </div>
+</div>
+<script>
+// Start: Display admin data after login
+window.addEventListener('load', () => {
+    const adminData = JSON.parse(sessionStorage.getItem('adminData'));
+    if (adminData) {
+        document.getElementById('adminName').textContent = adminData.adminname;
+        const adminInfoHTML = `
+            <div>${adminData.adminname} <span class="d-block c-grey fs-14 mt-10">Admin toll station</span></div>
+            <div>${adminData.joindin} <span class="d-block c-grey fs-14 mt-10">Joined </span></div>
+            <div>${adminData.admin_id} <span class="d-block c-grey fs-14 mt-10">admin_id</span></div>
+        `;
+        document.getElementById('adminInfo').innerHTML = adminInfoHTML;
+    }
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>  
+<script>
+// Function to initialize Firebase and set up configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAcjMJwqghfhn3YevNPDZrixSEX-RbDnYg",
+    authDomain: "smooth-bd82d.firebaseapp.com",
+    databaseURL: "https://smooth-bd82d-default-rtdb.firebaseio.com",
+    projectId: "smooth-bd82d",
+    storageBucket: "smooth-bd82d.appspot.com",
+    messagingSenderId: "351677031588",
+    appId: "1:351677031588:web:7d5463afe3844a9942b231",
+    measurementId: "G-CEDELYMSSD"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Function to update counts from Firebase database
+function updateCount(path, elementId) {
+    db.ref(path).on('value', (snapshot) => {
+        const count = snapshot.numChildren();
+        document.getElementById(elementId).innerText = count;
+    });
+}
+
+// Calling updateCount for different paths
+updateCount('users', 'newAccountsCount');
+updateCount('transactions', 'newTransactionsCount');
+updateCount('complaints', 'totalComplaintsCount');
+
+// Function to check if admin data is available in session storage on page load
+window.addEventListener('load', () => {
+    const adminData = JSON.parse(sessionStorage.getItem('adminData'));
+    if (!adminData) {
+        window.location.href = 'login.html'; // Redirect to login page if not logged in
+    }
+});
+
+// Function to calculate daily income statistics
+const today = new Date();
+const todayDate = today.toISOString().split('T')[0];
+const transactionsRef = db.ref('transactions');
+transactionsRef.once('value', (snapshot) => {
+    const temporaryTransactions = [];
+    snapshot.forEach((childSnapshot) => {
+        const transactionData = childSnapshot.val();
+        const transactionDate = transactionData.date_time.split(' ')[0];
+        if (transactionDate !== todayDate) {
+            temporaryTransactions.push(transactionData);
+        }
+    });
+    let totalCost = 0;
+    let licensePlates = [];
+    let locations = [];
+    temporaryTransactions.forEach((transactionData) => {
+        totalCost += parseFloat(transactionData.cost);
+        const licensePlate = transactionData.license_plate;
+        if (!licensePlates.includes(licensePlate)) {
+            licensePlates.push(licensePlate);
+        }
+        const location = transactionData.location;
+        if (!locations.includes(location)) {
+            locations.push(location);
+        }
+    });
+    document.getElementById('realMoney').innerText = `LE ${totalCost.toFixed(2)}`;
+    document.getElementById('realCars').innerText = licensePlates.length;
+    document.getElementById('realStations').innerText = locations.length;
+    const moneyTarget = 500; // Target values for money, cars, and stations
+    const carsTarget = 50;
+    const stationsTarget = 10;
+    const moneyPercentage = (totalCost / moneyTarget) * 100;
+    const carsPercentage = (licensePlates.length / carsTarget) * 100;
+    const stationsPercentage = (locations.length / stationsTarget) * 100;
+    document.querySelector('.target-row.blue .progress span').style.width = `${moneyPercentage}%`;
+    document.querySelector('.target-row.blue .progress span').innerText = `${moneyPercentage.toFixed(2)}%`;
+    document.querySelector('.target-row.orange .progress span').style.width = `${carsPercentage}%`;
+    document.querySelector('.target-row.orange .progress span').innerText = `${carsPercentage.toFixed(2)}%`;
+    document.querySelector('.target-row.green .progress span').style.width = `${stationsPercentage}%`;
+    document.querySelector('.target-row.green .progress span').innerText = `${stationsPercentage.toFixed(2)}%`;
+});
+
+// Function to handle task submission
+const taskForm = document.getElementById('taskForm');
+const taskTitleInput = document.getElementById('taskTitle');
+const taskDetailsInput = document.getElementById('taskDetails');
+const tasksTableBody = document.getElementById('tasksTableBody');
+let taskCounter = 0;
+
+taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const taskTitle = taskTitleInput.value.trim();
+    const taskDetails = taskDetailsInput.value.trim();
+    if (taskTitle !== '' && taskDetails !== '') {
+        const taskData = {
+            task_id: `t-${++taskCounter}`,
+            task_title: taskTitle,
+            task_details: taskDetails
+        };
+        const tasksRef = db.ref('admin_tasks');
+        tasksRef.push(taskData); // Push task data to Firebase
+        taskTitleInput.value = ''; // Clear input fields after submission
+        taskDetailsInput.value = '';
+    } else {
+        alert('Please fill in both task title and details.');
+    }
+});
+
+// Function to display tasks from Firebase
+const tasksRef = db.ref('admin_tasks');
+tasksRef.on('value', (snapshot) => {
+    tasksTableBody.innerHTML = '';
+    snapshot.forEach((childSnapshot) => {
+        const taskData = childSnapshot.val();
+        const taskId = taskData.task_id;
+        const taskTitle = taskData.task_title;
+        const taskDetails = taskData.task_details;
+        const taskRow = `
+            <tr>
+                <td>${taskId}</td>
+                <td>${taskTitle}</td>
+                <td>${taskDetails}</td>
+                <td><input type="checkbox" onclick="deleteTask('${childSnapshot.key}')" /></td>
+            </tr>`;
+        tasksTableBody.innerHTML += taskRow;
+    });
+});
+
+// Function to delete a task from Firebase
+function deleteTask(taskKey) {
+    const taskRef = db.ref(`admin_tasks/${taskKey}`);
+    taskRef.remove();
+}
+
+</script>
+</body>
+</html>

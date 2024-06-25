@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container login-container">
+        <div class="login-logo">
+            <img src="imgs/new logo.png" alt="Logo" style="max-width: 100%;">
+        </div>
+        <div class="login-form">
+            <form id="loginForm">
+                <h3>Admin Login</h3>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const adminData = [
+        {
+            emailaddress: "yossefhelmy190@gmail.com",
+            password: "Yousef12345",
+            adminname: "Yousef Helmy",
+            joindin: "16/5/2019",
+            admin_id: "30205160103456"
+        },
+        {
+            emailaddress: "yousefkhaked@gmail.com",
+            password: "Yousef1234",
+            adminname: "Yousef Khaled",
+            joindin: "31/1/2020",
+            admin_id: "30205160103457"
+        }
+    ];
+
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const isValidEmail = /^[\w-\.]+@gmail\.com$/.test(email);
+        if (!isValidEmail) {
+            alert('Please enter a valid email address ending with @gmail.com');
+            return;
+        }
+
+        const isValidPassword = /^[A-Za-z\d]{8,}$/.test(password);
+        if (!isValidPassword) {
+            alert('Password must be at least 8 characters long and contain only letters and numbers.');
+            return;
+        }
+
+        const admin = adminData.find(admin => admin.emailaddress === email && admin.password === password);
+        if (admin) {
+            sessionStorage.setItem('adminData', JSON.stringify(admin));
+            window.location.href = 'index.html'; 
+        } else {
+            alert('Email or password is incorrect.');
+        }
+    });
+});
+</script>
+</body>
+</html>

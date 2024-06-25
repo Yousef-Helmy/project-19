@@ -1,0 +1,25 @@
+
+body{
+    background-color: whitesmoke;
+}
+.login-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-form {
+    flex: 1;
+    max-width: 450px;
+}
+.login-logo {
+    flex: 1;
+    max-width: 450px;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+}
